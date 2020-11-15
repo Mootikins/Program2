@@ -13,4 +13,4 @@ life: src/life.c
 	mpicc $(CFLAGS) -o $@ $^ -lm
 
 clean:
-	rm ping_pong* life
+	rm ping_pong life

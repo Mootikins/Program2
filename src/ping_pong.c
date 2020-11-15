@@ -1,12 +1,24 @@
+/* File:    ping_pong.c
+ *
+ * Compile: mpicc -g -Wall -o ping_pong ping_pong.c -lm -DBLOCKING
+ *          mpicc -g -Wall -o ping_pong ping_pong.c -lm -DNONBLOCKING
+ *          mpicc -g -Wall -o ping_pong ping_pong.c -lm -DCOMBINATION
+ *          Each one of the above will compile the program to the same binary,
+ *          but with different MPI calls.
+ * Run:     ./ping_pong m
+ * Input:   m is the size of the message to send
+ * Output:  The average of PING_PONG_LIMIT round trips of the "ball"
+ */
+
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #define PING_TAG 0
 #define PONG_TAG 1
-#define PING_PONG_LIMIT 50
+#define PING_PONG_LIMIT 500
 
-int main( int argc, char *argv[] )
+int main( int argc, char* argv[] )
 {
 	MPI_Init( &argc, &argv );
 
@@ -26,7 +38,6 @@ int main( int argc, char *argv[] )
 	if ( argc == 2 )
 	{
 		message_size = strtol( argv[1], NULL, 10 );
-		printf( "Message size: %d\n", message_size );
 	}
 	else
 	{
@@ -39,7 +50,7 @@ int main( int argc, char *argv[] )
 		MPI_Abort( MPI_COMM_WORLD, 1 );
 	}
 
-	int *buffer = (int *)malloc( sizeof( int ) * message_size );
+	int* buffer = (int*)malloc( sizeof( int ) * message_size );
 	for ( int i = 0; i < message_size; ++i )
 	{
 		buffer[i] = 0;
@@ -50,7 +61,7 @@ int main( int argc, char *argv[] )
 	MPI_Status status;
 #endif
 #ifdef COMBINATION
-	int *combo_buffer = (int *)malloc( sizeof( int ) * message_size );
+	int* combo_buffer = (int*)malloc( sizeof( int ) * message_size );
 	for ( int i = 0; i < message_size; ++i )
 	{
 		combo_buffer[i] = 0;
@@ -80,7 +91,6 @@ int main( int argc, char *argv[] )
 			              MPI_COMM_WORLD, &status );
 #endif
 			elapsed_time += MPI_Wtime();
-			printf( "PONG: %lf\n", elapsed_time );
 			total_time += elapsed_time;
 		}
 		else
