@@ -1,7 +1,16 @@
-all: ping_pong game_of_life
+CFLAGS=-g -Wall
 
-ping_pong: src/ping_pong.c
-	mpicc -g -Wall -o $@ $^ -lm
+ping_pong_blocking: src/ping_pong.c
+	mpicc $(CFLAGS) -o ping_pong $^ -lm -DBLOCKING
 
-game_of_life: src/life.c
-	mpicc -g -Wall -o $@ $^ -lm
+ping_pong_nonblocking: src/ping_pong.c
+	mpicc $(CFLAGS) -o ping_pong $^ -lm -DNONBLOCKING
+
+ping_pong_combo: src/ping_pong.c
+	mpicc $(CFLAGS) -o ping_pong $^ -lm -DCOMBINATION
+
+life: src/life.c
+	mpicc $(CFLAGS) -o $@ $^ -lm
+
+clean:
+	rm ping_pong* life
