@@ -117,7 +117,7 @@ int main( int argc, char* argv[] )
 
 	if ( world_rank == 0 )
 	{
-		printf( "Average ping-pong time: %lf\n",
+		printf( "Average ping-pong time: %1.8lf sec\n",
 		        total_time / ( 2 * PING_PONG_LIMIT ) );
 	}
 
