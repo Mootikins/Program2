@@ -51,10 +51,6 @@ int main( int argc, char* argv[] )
 	}
 
 	int* buffer = (int*)malloc( sizeof( int ) * message_size );
-	for ( int i = 0; i < message_size; ++i )
-	{
-		buffer[i] = 0;
-	}
 
 #ifndef BLOCKING
 	MPI_Request request;
