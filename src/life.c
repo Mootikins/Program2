@@ -237,7 +237,7 @@ void print_game( bool* game_field, int width, int height )
 			}
 			else
 			{
-				printf( " " );
+				printf( "." );
 			}
 		}
 		printf( "\n" );
