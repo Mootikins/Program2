@@ -72,7 +72,7 @@ int main( int argc, char* argv[] )
 	{
 		if ( world_rank == 0 )
 		{
-			double elapsed_time = -MPI_Wtime();
+			elapsed_time = -MPI_Wtime();
 #ifdef BLOCKING
 			MPI_Send( buffer, message_size, MPI_INT, partner_rank, PING_TAG,
 			          MPI_COMM_WORLD );

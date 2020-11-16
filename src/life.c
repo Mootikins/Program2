@@ -58,6 +58,7 @@ int main( int argc, char* argv[] )
 	bool* last_game_state = calloc( width * height, sizeof( bool ) );
 	bool* new_game_state = calloc( width * height, sizeof( bool ) );
 	ProcInfo* proc_data = calloc( world_size, sizeof( ProcInfo ) );
+
 	// Adjacency offsets makes it easier to count cells nearby; we don't include
 	// the offset of zero since the current cell's status is only used to
 	// determine what rule to use
@@ -84,6 +85,7 @@ int main( int argc, char* argv[] )
 			proc_data[i].offset = i * normal_num_cells;
 			proc_data[i].num_cells = normal_num_cells;
 		}
+
 		// To make things as simple as possible, the last processor gets the
 		// remainder since we can't give processors parts of cells.
 		proc_data[world_size - 1].offset = normal_num_cells * ( world_size - 1 );
@@ -193,10 +195,10 @@ void apply_rules( ProcInfo* proc_data, bool* last_game_state,
 			if ( curr_cell_index + offset >= 0 &&
 			     // Bottom edge
 			     curr_cell_index + offset < width * height &&
-				  // Left and Right edges
-				  // If the left/right adjacent cells overflow to another
-				  // row, then the differnce between their column numbers
-				  // is greater than 1 -- otherwise it is 1 or 0
+			     // Left and Right edges
+			     // If the left/right adjacent cells overflow to another
+			     // row, then the differnce between their column numbers
+			     // is greater than 1 -- otherwise it is 1 or 0
 			     abs( ( curr_cell_index % width ) -
 			          ( ( curr_cell_index + offset ) % width ) ) <= 1 &&
 			     // Currently checked adjacent cell is alive
