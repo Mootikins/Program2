@@ -5,7 +5,7 @@
  *          mpicc -g -Wall -o ping_pong ping_pong.c -lm -DCOMBINATION
  *          Each one of the above will compile the program to the same binary,
  *          but with different MPI calls.
- * Run:     ./ping_pong m
+ * Run:     mpiexec -n 2 ./ping_pong m
  * Input:   m is the size of the message to send
  * Output:  The average of PING_PONG_LIMIT round trips of the "ball"
  */

@@ -1,8 +1,9 @@
 /* File:    life.c
  *
  * Compile: mpicc -g -Wall -o life life.c -lm
- * Run:     ./life i j k m n
- * Input:   i is the number of live cells
+ * Run:     mpiexec -n p ./life i j k m n
+ * Input:   p is the number of computers/processors to use
+ *          i is the number of live cells
  *          j is the number of iterations of the game of life
  *          k is how often to print the game state (eg every kth iteration)
  *          m is the game width
