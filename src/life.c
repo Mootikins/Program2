@@ -194,6 +194,9 @@ void apply_rules( ProcInfo* proc_data, bool* last_game_state,
 			     // Bottom edge
 			     curr_cell_index + offset < width * height &&
 				  // Left and Right edges
+				  // If the left/right adjacent cells overflow to another
+				  // row, then the differnce between their column numbers
+				  // is greater than 1 -- otherwise it is 1 or 0
 			     abs( ( curr_cell_index % width ) -
 			          ( ( curr_cell_index + offset ) % width ) ) <= 1 &&
 			     // Currently checked adjacent cell is alive
